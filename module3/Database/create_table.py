@@ -1,20 +1,46 @@
+"""
+Модуль для создания таблиц в базе данных
+
+Создает структуру базы данных для системы "Мастер пол"
+с необходимыми таблицами и связями между ними.
+"""
 import config
 import psycopg
 
-connection = psycopg.connect(
-    host = config.HOST,
-    user = config.USER,
-    dbname = config.DBNAME,
-    password = config.PASSWORD,
-    port = config.PORT)
+def connect_to_db():
+    """Подключение к базе данных из конфигурационного файла"""
+    try:
+        connection = psycopg.connect(
+            host=config.HOST,
+            user=config.USER,
+            dbname=config.DBNAME,
+            password=config.PASSWORD,
+            port=config.PORT
+        )
+        print("Подключение к БД установлено")
+        return connection
+    except Exception as error:
+        print(f"Ошибка подключения к БД: {error}")
+        return None
 
 def create_table(query, connection):
-    cursor = connection.cursor()
-    cursor.execute(query)
-    connection.commit()
-    cursor.close()
+    """
+    Выполняет SQL-запрос для создания таблиц
+    
+    :param query: SQL запрос для создания таблиц
+    :param connection: Соединение с базой данных
+    """
+    try:
+        cursor = connection.cursor()
+        cursor.execute(query)
+        connection.commit()
+        cursor.close()
+        print("Таблицы успешно созданы")
+    except Exception as error:
+        print(f"Ошибка при создании таблиц: {error}")
 
-query = '''
+# SQL-запросы на создание таблиц
+SQL_CREATE_TABLES = '''
     create table product_type_import (
         type_product nchar(100) PRIMARY KEY,
         coef_type_product real NOT NULL
@@ -52,7 +78,14 @@ query = '''
         count_products INT NOT NULL,
         date_prod DATE NOT NULL,
         primary key (production_name_fk, partner_name_fk)
-        );
+    );
 '''
 
-create_table(query, connection)
+# Основная функция создания таблиц
+def main():
+    """Основная функция для создания таблиц в базе данных"""
+    connection = connect_to_db()
+    if connection:
+        create_table(SQL_CREATE_TABLES, connection)
+
+main()
