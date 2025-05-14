@@ -1,5 +1,5 @@
 import psycopg
-from check_input_data import start_check
+from module4.check_input_data import start_check
 
 class Database():
     def __init__(self):
@@ -12,10 +12,10 @@ class Database():
         '''
         try:
             conn = psycopg.connect(
-                host = "winserver001.asuscomm.com",
-                user = 'admin',
-                password = 'admin',
-                dbname = 'demolearning',
+                host = "localhost",
+                user = 'postgres',
+                password = '1234',
+                dbname = 'test',
                 port = 5432
             )
             print("Подключение установлено")

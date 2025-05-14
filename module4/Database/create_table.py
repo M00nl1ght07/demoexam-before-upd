@@ -9,7 +9,8 @@ try:
         user = config.USER,
         dbname = config.DBNAME,
         password = config.PASSWORD,
-        port = config.PORT)
+        port = config.PORT
+    )
 
     # Функция создания таблиц
     # query - запро

@@ -3,7 +3,6 @@ import config
 import psycopg
 import pandas as pd
 
-
 try:
      # Строка подключения БД из файла конфигурации
     connection = psycopg.connect(
@@ -22,7 +21,7 @@ try:
             INSERT INTO product_type_import VALUES (%s, %s);
         '''
         # Чтение содержимого таблицы с помощью движка openpyxl и библиотеки pandas
-        df = pd.read_excel('excel/Product_type_import.xlsx', engine = 'openpyxl')
+        df = pd.read_excel('C:\\Users\\igris\\OneDrive\\Рабочий стол\\demoexam-before-upd\\excel\\Product_type_import.xlsx', engine = 'openpyxl')
         cursor = connection.cursor()
 
         for row in df.itertuples():
@@ -43,7 +42,7 @@ try:
             INSERT INTO products_import VALUES (%s, %s, %s, %s);
         '''
         # Чтение содержимого таблицы с помощью движка openpyxl и библиотеки pandas
-        df = pd.read_excel("excel/Products_import.xlsx", engine = "openpyxl")
+        df = pd.read_excel("C:\\Users\\igris\\OneDrive\\Рабочий стол\\demoexam-before-upd\\excel\\Products_import.xlsx", engine = "openpyxl")
 
         cursor = connection.cursor()
 
@@ -66,7 +65,7 @@ try:
             INSERT INTO material_type_import VALUES (%s, %s);
             '''
         # Чтение содержимого таблицы с помощью движка openpyxl и библиотеки pandas
-        df = pd.read_excel("excel/Material_type_import.xlsx", engine="openpyxl")
+        df = pd.read_excel("C:\\Users\\igris\\OneDrive\\Рабочий стол\\demoexam-before-upd\\excel\\Material_type_import.xlsx", engine="openpyxl")
 
         cursor = connection.cursor()
         for row in df.itertuples():
@@ -86,7 +85,7 @@ try:
             INSERT INTO partners_import VALUES (%s, %s, %s, %s, %s, %s, %s, %s);
             '''
         # Чтение содержимого таблицы с помощью движка openpyxl и библиотеки pandas
-        df = pd.read_excel("excel/Partners_import.xlsx", engine="openpyxl")
+        df = pd.read_excel("C:\\Users\\igris\\OneDrive\\Рабочий стол\\demoexam-before-upd\\excel\\Partners_import.xlsx", engine="openpyxl")
         cursor = connection.cursor()
         for row in df.itertuples():
             type_partner = row._1
@@ -113,7 +112,7 @@ try:
         cursor = connection.cursor()
 
         # Чтение содержимого таблицы с помощью движка openpyxl и библиотеки pandas
-        df = pd.read_excel("excel/Partner_products_import.xlsx", engine = "openpyxl")
+        df = pd.read_excel("C:\\Users\\igris\\OneDrive\\Рабочий стол\\demoexam-before-upd\\excel\\Partner_products_import.xlsx", engine = "openpyxl")
         for row in df.itertuples():
             production_name_fk = row.Продукция
             partner_name_fk = row._2
